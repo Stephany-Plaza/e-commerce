@@ -1,0 +1,23 @@
+.nav{
+    margin-left: 20;
+    list-style: none;
+    margin: 15px;
+}
+.nav a{
+    text-decoration: none;
+    color: coral;
+}
+.navLi{
+    margin-left: 20px;
+    float: left;
+    text-align: center;
+    width: 10%;
+}
+.h1{
+    color: aquamarine;
+}
+.img{
+    display: flex;
+    width: 15px;
+    height: 15px;
+}
