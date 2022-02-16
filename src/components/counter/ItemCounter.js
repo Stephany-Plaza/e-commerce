@@ -17,7 +17,7 @@ const FunctionCounter=({stock})=>{
         
     }
     const buyBotton=()=>{
-        console.log('gracias por su compra');
+        alert('gracias por su compra');
     }
     return(
         <>
