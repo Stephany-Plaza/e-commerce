@@ -1,6 +1,6 @@
 import Items from "../ListItems/Item"
 //simulacion de llamada a API
-const ItemList=()=>{
+const ItemList=({items})=>{
     return(
     <ul>
         {Items.map(item => {

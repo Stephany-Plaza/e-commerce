@@ -30,7 +30,7 @@ const ItemListContainer = ({ greeting }) => {
         <>
             <h1> {greeting}</h1>
             <FunctionCounter stock={9} />
-            <ItemList />
+            <ItemList items={items}/>
         </>
     )
 }

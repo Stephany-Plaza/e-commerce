@@ -5,3 +5,4 @@ const Items = [
     { id: 4, name: 'Tacos Clasicos F50 Rojos', price: 'usd 95', category: 'Clasicos', img: 'e', stock: 10, descripcion: 'Descripcion de Tacos Clasicos Adidas F50 Rojos' }
 ]
 export default Items
+
