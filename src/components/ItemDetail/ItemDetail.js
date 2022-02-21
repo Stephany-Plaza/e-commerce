@@ -1,21 +1,21 @@
 import './Item.css'
 
 
-const Item = ({items}) => {
+const Item = ({products}) => {
    
     return (
         <article className="CardItem">
             <header className="Header">
                 <h2 className="ItemHeader">
-                    {Item.title}
+                    {products?.title}
                 </h2>
             </header>
             <picture>
-                <img src={Item.thumbnail} alt={Item.title} className="ItemImg"/>
+                <img src={products?.thumbnail} alt={products?.title} className="ItemImg"/>
             </picture>
             <section>
                 <p className="Info">
-                    Precio: ${Item.price}
+                    Precio: ${products?.price}
                 </p>
             </section>           
             <footer className='ItemFooter'>
