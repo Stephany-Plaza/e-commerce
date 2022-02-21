@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <ItemListContainer greeting='Carrito de Compras' />
+      <ItemListContainer greeting='Consumiendo la API de mercado libre' />
     </div>
   );
 }
