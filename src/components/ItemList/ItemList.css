@@ -1,0 +1,8 @@
+.ListGroup {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+.ListGroup li{
+    list-style: none;
+}
