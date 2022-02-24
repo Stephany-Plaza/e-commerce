@@ -1,20 +1,9 @@
 import FunctionCounter from "../counter/ItemCounter"
 import { useEffect, useState } from "react"
-import Items from "../ListItems/Item"
 import ItemList from "../ItemList/ItemList"
 import Item from "../ItemDetail/ItemDetail"
-
-
-
-//simulacion de llamada a API
-const getItems= ()=>{
-    return new Promise((resolve) => {
-        setTimeout(()=>{
-            resolve(Items)
-        })
-    }, 2000)
-}
-
+import { getItems , getItemsbyCategory} from "../ListItems/Item"
+import { useParams } from "react-router-dom"
 
 
 
@@ -23,24 +12,25 @@ const ItemListContainer = ({ greeting }) => {
 
     const [items,setItems]=useState([])
     const [productos,setProductos]= useState([])
+    const {categoryId} = useParams();
     
-   
+   console.log(categoryId)
 
     //useEfect es para ejecutar el codigo que tiene adentro despues del return
-    useEffect(()=>{
+    /*useEffect(()=>{
         fetch('https://api.mercadolibre.com/sites/MLA/search?q=tacosdefutbol')
         .then(response=>{
            return response.json()
         }) .then(res=>{
             setItems(res.results)
         })
-    }, [])
+    }, [])*/
 
     useEffect(()=>{
-        getItems().then(response=>{
+        getItems(categoryId).then(response=>{
             return setProductos(response)
         })
-    },[])
+    },[categoryId])
     //console.log(productos)
     //console.log(Items)
     return (
@@ -54,13 +44,7 @@ const ItemListContainer = ({ greeting }) => {
 }
 export default ItemListContainer
 
-export const DetalleItem= ()=>{
-    return new Promise((resolve) => {
-        setTimeout(()=>{
-            resolve(Items[0])
-        })
-    }, 2000)
-}
+
 
 
 

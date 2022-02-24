@@ -1,10 +1,12 @@
 import './CartWidget.css'
-const CartWidget = ({height,width})=>{
+const CartWidget = ()=>{
     return(
-        <div className='contenedor-carrito'>
-    <img className='imagen-carrito' src="./images/carrito-logo.png"></img>
-    <p className='cantidad'>5</p>
-    </div>
+        <button className='CartWidget'>
+    <img className='CartImg' src="./images/carrito-logo.png" alt='cartImage'></img>
+    5
+    </button>
     )
 }
 export default CartWidget
+
+

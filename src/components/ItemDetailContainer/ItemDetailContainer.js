@@ -1,23 +1,24 @@
 import Item from "../ItemDetail/ItemDetail"
-import { DetalleItem } from "../ItemListContainer/ItemListContainer"
+import { DetalleItem } from "../ListItems/Item"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import Items from "../ItemDetail/ItemDetail"
+import { Items } from "../ListItems/Item"
+
 
 
 
 const ItemDetailContainer = (id)=>{
     const [productoLocal,setProductoLocal]= useState([])
-    const params = useParams();
+    const {productId} = useParams();
 
 
     useEffect(()=>{
-        DetalleItem().then(r=>{
+        DetalleItem(productId).then(r=>{
             return setProductoLocal(r)
         })
-    },[])
+    },[productId])
     //console.log(productos)
-    //console.log(Items)
+    //console.log(params)
     return (
         <>
             <h1>'Detalle de un solo producto'</h1>
