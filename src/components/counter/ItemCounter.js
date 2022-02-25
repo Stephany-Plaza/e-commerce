@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const FunctionCounter=({stock})=>{
+const ItemCounter=({stock})=>{
     const [count, setCount]= useState(0); //useState devuelve un array de una estado y una funcion, asi que hay que desestructurarlo[state,setState]
 
     const decrement=()=>{
@@ -29,4 +29,4 @@ const FunctionCounter=({stock})=>{
         </>
     )
 }
-export default FunctionCounter
+export default ItemCounter

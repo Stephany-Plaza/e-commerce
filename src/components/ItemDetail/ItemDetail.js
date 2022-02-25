@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 
 
-const Item = ({products}) => {
+const ItemDetail = ({products}) => {
    
     return (
         <article className="CardItem">
@@ -28,4 +28,4 @@ const Item = ({products}) => {
     )
 }
 
-export default Item
+export default ItemDetail

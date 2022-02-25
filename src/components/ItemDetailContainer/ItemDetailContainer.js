@@ -1,8 +1,8 @@
-import Item from "../ItemDetail/ItemDetail"
-import { DetalleItem } from "../ListItems/Item"
+import ItemDetail from "../ItemDetail/ItemDetail"
+import { DetalleItem } from "../ListItems/mock"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { Items } from "../ListItems/Item"
+import { items } from "../ListItems/mock"
 
 
 
@@ -22,7 +22,7 @@ const ItemDetailContainer = (id)=>{
     return (
         <>
             <h1>'Detalle de un solo producto'</h1>
-            <Item products={productoLocal}/>
+            <ItemDetail products={productoLocal}/>
         </>
     )
 }
