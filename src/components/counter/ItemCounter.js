@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const ItemCounter = ({ stock, initial=1 }) => {
+const ItemCounter = ({ stock, initial }) => {
     const [count, setCount] = useState(initial); //useState devuelve un array de una estado y una funcion, asi que hay que desestructurarlo[state,setState]
 
 
