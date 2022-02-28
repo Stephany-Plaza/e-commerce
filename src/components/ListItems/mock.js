@@ -38,7 +38,7 @@ export const getItems = (category) => {
         let response = [];
         category === undefined ? response = items : response = items.filter(i => { return i.category == category })
         setTimeout(() => {
-            resolve(response)
+            resolve (response)
         })
     }, 2000)
 }
