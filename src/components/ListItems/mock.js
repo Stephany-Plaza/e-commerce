@@ -36,7 +36,7 @@ export const items = [
 export const getItems = (category) => {
     return new Promise((resolve) => {
         let response = [];
-        category === undefined ? response = items : response = items.filter(i => { return i.category == category })
+        category === undefined ? response = items : response = items.filter(i => { return i.category == category } )
         setTimeout(() => {
             resolve (response)
         })
