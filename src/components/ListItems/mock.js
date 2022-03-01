@@ -23,6 +23,12 @@ export const items = [
     { id: 20, title: 'Espinilleras Adidas Predator League', price: 'usd 50', category: 'espinilleras', thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHyTX3-fTC8bKiuSVcV9KMBLZG-iZBsIoveA&usqp=CAU', stock: 29, descripcion: 'Espinilleras Adidas' }
 ]
 
+export const categories = [
+    {id:'claseA', description:'Tacos Clase A'},
+    {id:'clasicos', description:'Tacos Clasicos'},
+    {id:'camiseta', description:'Camisetas'},
+    {id:'espinilleras', description:'Espinilleras'}
+]
 
 //simulacion de llamada a API
 /*export const getItems = () => {
@@ -49,6 +55,14 @@ export const DetalleItem = (id) => {
         const prod = items.find(p => p.id === parseInt(id))
         setTimeout(() => {
             resolve(prod)
-        }, 1000)
+        }, 2000)
+    })
+}
+
+export const getCategories = ()=>{
+    return new Promise((resolve)=>{
+        setTimeout(()=>{
+            resolve(categories)
+        },1000)
     })
 }

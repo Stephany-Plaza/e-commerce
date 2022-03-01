@@ -12,6 +12,7 @@ const ItemListContainer = ({ greeting }) => {
 
     const [items,setItems]=useState([])
     const [productos,setProductos]= useState([])
+    const [loading,setLoading]=useState(true)
     const {categoryId} = useParams();
     
    
@@ -29,6 +30,8 @@ const ItemListContainer = ({ greeting }) => {
     useEffect(()=>{
         getItems(categoryId).then(response=>{
             return setProductos(response)
+        }).finally(()=>{
+            setLoading(false)
         })
     },[categoryId])
     //console.log(productos)
@@ -37,8 +40,7 @@ const ItemListContainer = ({ greeting }) => {
         <>
             <h1> {greeting}</h1>
             {/* <ItemList items={items}/> */}
-            <h1>{greeting='Detalle de los productos locales'}</h1>
-            <ItemList items={productos} />
+            {loading?<h1>Loading...</h1>:<ItemList items={productos} />}
         </>
     )
 }

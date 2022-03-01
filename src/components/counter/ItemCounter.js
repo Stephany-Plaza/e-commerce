@@ -1,33 +1,40 @@
 import { useEffect, useState } from "react";
+import { items } from "../ListItems/mock";
 
-const ItemCounter = ({ stock, initial }) => {
-    const [count, setCount] = useState(initial); //useState devuelve un array de una estado y una funcion, asi que hay que desestructurarlo[state,setState]
+const ItemCounter = ({ stock, initial = 1,onAdd }) => {
+    //useState devuelve un array de una estado y una funcion, asi que hay que desestructurarlo[state,setState]
+    const [quantity, setQuantity] = useState(initial)
 
+    const increment = () => {
+        if (quantity < stock) {
+            setQuantity(quantity + 1)
+        }
+    }
 
     const decrement = () => {
-        if (count > 0) {
-            setCount(count - 1) ;
+        if (quantity > 0) {
+            setQuantity(quantity - 1)
         }
+    }
 
-    }
-    const increment = () => {
-        if (count === stock) {
-            return false
-        }
-        setCount(count + 1);
-
-    }
-    const onAdd = () => {
-        alert(`gracias por su compra de ${count}`);//esta funcion va afuera de este componente.
-    }
+   
     return (
-        <>
-            <h3>Counter</h3>
-            <h3>{count}</h3>
-            <button onClick={decrement}>-</button>
-            <button onClick={increment}>+</button>
-            <button onClick={onAdd}>Agregar al Carrito</button>
-        </>
+        <div align="center">
+            <table >
+                <tbody>
+                    <tr>
+                        <td align="left"><button className="Option" onClick={() => decrement()}>-</button></td>
+                        <td align="center" style={{ fontSize: '20px' }}>{quantity}</td>
+                        <td align="right"><button className="Option" onClick={() => increment()}>+</button></td>
+                    </tr>
+                    <tr>
+                        <td align="center" colSpan="5"><button className="Option" onClick={(e) => onAdd(quantity)}>Agregar al carrito</button></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
     )
+
 }
 export default ItemCounter
