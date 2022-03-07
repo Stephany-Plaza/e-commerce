@@ -1,17 +1,31 @@
 import './Item.css'
 import { Link } from 'react-router-dom'
 import ItemCounter from '../counter/ItemCounter'
-import { useState, useEffect } from 'react'
+import { useState, useContext, useCallback } from 'react'
 import { useNavigate } from "react-router-dom";
+import CartContext from '../../context/CartContext'
 
 
 
 const ItemDetail = ({ products }) => {
     const [cartButton, setCartButton] = useState(false);
     const navigate = useNavigate()
+    const[quantity,setQuantity]=useState(0)
+
+    const {addItem}=useContext(CartContext)
+    
 
     const onAdd = (quantity) => {
-        alert(`gracias por su compra de ${quantity} `);
+        setQuantity(quantity)
+
+        const productToAdd=[
+            products.id,
+            products.title,
+            products.price,
+            products.category,
+            quantity
+        ]
+        addItem(productToAdd,quantity)
         setCartButton(true)
     }
     
@@ -31,7 +45,7 @@ const ItemDetail = ({ products }) => {
                 </p>
             </section>
             <footer className='ItemFooter'>
-                {cartButton ? <button onClick={() => { navigate('/cart') }}>Ir al carrito</button> : <ItemCounter stock={products.stock} onAdd={onAdd} />}
+                {cartButton ? <button onClick={() => { navigate('/cart') }}>Ir al carrito</button> : <ItemCounter stock={products.stock} onAdd={onAdd} initial={1} />}
             </footer>
         </article>
     )

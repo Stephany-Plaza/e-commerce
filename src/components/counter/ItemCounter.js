@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { items } from "../ListItems/mock";
+import { useState } from "react";
+
 
 const ItemCounter = ({ stock, initial = 1,onAdd }) => {
     //useState devuelve un array de una estado y una funcion, asi que hay que desestructurarlo[state,setState]
