@@ -25,7 +25,7 @@ const ItemDetail = ({ products }) => {
             products.category,
             quantity
         ]
-        addItem(productToAdd,quantity)
+        addItem(products,quantity)
         setCartButton(true)
     }
     

@@ -1,47 +1,70 @@
-import { createContext,useState } from "react";
+import { createContext, useState } from "react";
 import Item from "../components/Item/Item";
 
 //creamos el context(con su referencia)
 const Context = createContext()
 
 //ahora el custom provider que es el que envuelve a los hijos
-export const CartContextProvider=({children})=>{
-    const[cart,setCart]=useState([])
+export const CartContextProvider = ({ children }) => {
+    const [products, setProducts] = useState([])
+    console.log(products)
+    
 
-    const addItem =(productToAdd,quantity)=>{
+    const addItem = (items, quantity) => {
         const newObj = {
-            productToAdd,
+            items,
             quantity
         }
-            //actualizar el producto con la cantidad nueva, logica de producto repetido
-            let itemInCart = cart.find((cartItem)=>cartItem.id===productToAdd.id);
+        //actualizar el producto con la cantidad nueva, logica de producto repetido
+        let itemInCart = products.find((cartItem) => cartItem.id === items.id);
 
-            if(!itemInCart) return setCart([...cart,{...productToAdd,quantity}]);
+        if (!itemInCart) return setProducts([...products, { ...items, quantity }]);
 
-            itemInCart.quantity += quantity;
-            setCart([
-                ...cart.filter((cartItem)=> cartItem.id !== productToAdd.id),
-                itemInCart,
-            ]);
-        }
-
-    const removeItem=()=>{
-        //para eliminar un item
-    }
-    const isInCart=(id)=>{
-        return cart.some( p=> p.id===id )
+        itemInCart.quantity += quantity;
+        setProducts([
+            ...products.filter((cartItem) => cartItem.id !== items.id),
+            itemInCart,
+        ]);
     }
 
+    const removeItem = (id) => {
+        const newProducts = products.filter(prod => prod.id !== id)
+        setProducts(newProducts)
+    }
 
-    console.log(cart)
+    const clearCart = () => {
+        setProducts([])
+    }
+
+    const getTotal = () => {
+        let total = 0
+        products.forEach(prod => {
+            total = total + prod.price * prod.quantity
+        })
+        return total
+    }
+
+    const getQuantity = () => {
+        let count = 0
+        products.forEach(prod => {
+            count = count + prod.quantity
+        })
+        return count
+    }
+    /*const isInCart = (id) => {
+        return cart.some(p => p.id === id)
+    }*/
+
+
+    
     return (
         <Context.Provider value={{
-            cart,
+            products,
             addItem,
             removeItem
         }}>
             {children}
-            </Context.Provider>
+        </Context.Provider>
 
     )
 }
