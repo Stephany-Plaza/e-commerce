@@ -2,10 +2,12 @@ import './Navbar.css'
 import CartWidget from '../CartWidget/CartWidget'
 import { NavLink } from 'react-router-dom'
 import { useState,useEffect } from 'react'
+import CartContext from '../../context/CartContext'
 import { getCategories } from '../ListItems/mock'
 
 const Navbar = () => {
     const [categories,setCategories]=useState([])
+    
 
     useEffect(()=>{
         getCategories().then(categories=>{
@@ -13,8 +15,9 @@ const Navbar = () => {
         })
     },[])
 
+    
     return (
-        <>
+        <> 
             <nav className='NavBar'>
                 <div><h3>
                     <NavLink to={'/'} className={({ isActive }) =>

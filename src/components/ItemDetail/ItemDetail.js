@@ -1,5 +1,4 @@
 import './Item.css'
-import { Link } from 'react-router-dom'
 import ItemCounter from '../counter/ItemCounter'
 import { useState, useContext, useCallback } from 'react'
 import { useNavigate } from "react-router-dom";
@@ -46,7 +45,7 @@ const ItemDetail = ({ products }) => {
                 </p>
             </section>
             <footer className='ItemFooter'>
-                {cartButton ? <button onClick={() => { navigate('/cart') }}>Ir al carrito</button> : <ItemCounter stock={products.stock} onAdd={onAdd} initial={1} />}
+                {cartButton ? <button onClick={() => { navigate('/cart') }}>Terminar mi compra</button> : <ItemCounter stock={products.stock} onAdd={onAdd} initial={1} />}
             </footer>
         </article>
     )

@@ -17,5 +17,13 @@
     border: none;
     border-style: none;
     cursor: pointer;
+    margin-left: 35px;
     outline: inherit;
 }
+.titleofproduct{
+    margin-left: inherit;
+}
+h3{
+    margin-left: auto;
+}
+
