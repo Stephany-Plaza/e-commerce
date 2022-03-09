@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import Item from "../components/Item/Item";
+import { items } from "../components/ListItems/mock";
 
 //creamos el context(con su referencia)
 const Context = createContext()
@@ -8,17 +9,16 @@ const Context = createContext()
 export const CartContextProvider = ({ children }) => {
     const [products, setProducts] = useState([])
     console.log(products)
-    
 
     const addItem = (items, quantity) => {
-        const newObj = {
+        /*const newObj = {
             items,
             quantity
-        }
+        }*/
         //actualizar el producto con la cantidad nueva, logica de producto repetido
         let itemInCart = products.find((cartItem) => cartItem.id === items.id);
 
-        if (!itemInCart) return setProducts([...products, { ...items, quantity }]);
+        if (!itemInCart) return setProducts([...products, { ...items, quantity }]);//que pasa aqui?
 
         itemInCart.quantity += quantity;
         setProducts([
@@ -56,17 +56,21 @@ export const CartContextProvider = ({ children }) => {
     }*/
 
 
-    
+
     return (
         <Context.Provider value={{
             products,
             addItem,
-            removeItem
+            removeItem,
+            clearCart,
+            getQuantity,
+            getTotal
         }}>
             {children}
         </Context.Provider>
-
     )
 }
 export default Context
+
+
 
