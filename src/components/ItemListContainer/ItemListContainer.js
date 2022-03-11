@@ -1,44 +1,41 @@
 import { useEffect, useState } from "react"
 import ItemList from "../ItemList/ItemList"
-import { getItems} from '../ListItems/mock'
 import { useParams } from "react-router-dom"
+import { getDocs, collection, QuerySnapshot, query, where } from 'firebase/firestore'
+import { firestoreDb } from "../../services/firebase/firebase"
 
 
 
 
 const ItemListContainer = ({ greeting }) => {
 
-    const [items,setItems]=useState([])
-    const [productos,setProductos]= useState([])
-    const [loading,setLoading]=useState(true)
-    const {categoryId} = useParams();
-    
-   
+    const [productos, setProductos] = useState([])
+    const [loading, setLoading] = useState(true)
+    const { categoryId } = useParams();
 
-    //useEfect es para ejecutar el codigo que tiene adentro despues del return
-    /*useEffect(()=>{
-        fetch('https://api.mercadolibre.com/sites/MLA/search?q=tacosdefutbol')
-        .then(response=>{
-           return response.json()
-        }) .then(res=>{
-            setItems(res.results)
-        })
-    }, [])*/
 
-    useEffect(()=>{
-        getItems(categoryId).then(response=>{
-            return setProductos(response)
-        }).finally(()=>{
+    useEffect(() => {
+        const collectionRef = categoryId ?
+            query(collection(firestoreDb, 'items'), where('category', '==', categoryId)) :
+            collection(firestoreDb, 'items');
+
+
+        getDocs(collectionRef).then(QuerySnapshot => {
+            const products = QuerySnapshot.docs.map(doc => {
+                console.log(doc)
+                return { id: doc.id, ...doc.data() }
+            })
+            console.log(products)
+            setProductos(products)
+        }).finally(() => {
             setLoading(false)
         })
-    },[categoryId])
-    //console.log(productos)
-    //console.log(Items)
+    }, [categoryId])
+  
     return (
         <>
             <h1> {greeting}</h1>
-            {/* <ItemList items={items}/> */}
-            {loading?<h1>Loading...</h1>:<ItemList items={productos} />}
+            {loading ? <h1>Loading...</h1> : <ItemList items={productos} />}
         </>
     )
 }

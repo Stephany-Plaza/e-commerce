@@ -1,39 +1,38 @@
 import './Navbar.css'
 import CartWidget from '../CartWidget/CartWidget'
 import { NavLink } from 'react-router-dom'
-import { useState,useEffect, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import CartContext from '../../context/CartContext'
-import { getCategories } from '../ListItems/mock'
+import { getDocs, collection } from 'firebase/firestore'
+import { firestoreDb } from '../../services/firebase/firebase'
 
 const Navbar = () => {
-    const [categories,setCategories]=useState([])
-    const {products} = useContext(CartContext)
+    const [categories, setCategories] = useState([])
+    const { products } = useContext(CartContext)
 
-    useEffect(()=>{
-        getCategories().then(categories=>{
+    useEffect(() => {
+        getDocs(collection(firestoreDb, 'categories')).then(response => {
+            const categories = response.docs.map(category => {
+                return { id: category.id, ...category.data() }
+            })
             setCategories(categories)
         })
-    },[])
+    }, [])
 
-    
+
     return (
-        <> 
+        <>
             <nav className='NavBar'>
-                <div><h3>
-                    <NavLink to={'/'} className={({ isActive }) =>
-                        isActive ? 'ActiveOption' : 'Option'}>Shoes Store</NavLink></h3></div>
+                <div>
+                    <h3>
+                        <NavLink to={'/'} className={({ isActive }) =>
+                            isActive ? 'ActiveOption' : 'Option'}>Shoes Store</NavLink>
+                    </h3>
+                </div>
                 <div className='Categories'>
-                    {categories.map(cat=> <NavLink key={cat.id} to={`/category/${cat.id}`} className={({ isActive }) =>
-                     isActive ? 'ActiveOption' : 'Option'
-                     }>{cat.description}</NavLink>)}
-                    {/*<NavLink to={'/category/claseA'} className={({ isActive }) =>
-                        isActive ? 'ActiveOption' : 'Option'}>Tacos Clase A</NavLink>
-                    <NavLink to={'/category/clasicos'} className={({ isActive }) =>
-                        isActive ? 'ActiveOption' : 'Option'}>Tacos Clasicos</NavLink>
-                    <NavLink to={'/category/camiseta'} className={({ isActive }) =>
-                        isActive ? 'ActiveOption' : 'Option'}>Camisetas</NavLink>
-                    <NavLink to={'/category/espinilleras'} className={({ isActive }) =>
-                    isActive ? 'ActiveOption' : 'Option'}>Espinilleras</NavLink>*/}
+                    {categories.map(cat => <NavLink key={cat.id} to={`/category/${cat.id}`} className={({ isActive }) =>
+                        isActive ? 'ActiveOption' : 'Option'
+                    }>{cat.description}</NavLink>)}
                 </div>
                 {products.length > 0 && <CartWidget />}
             </nav>

@@ -1,37 +1,40 @@
 import ItemDetail from "../ItemDetail/ItemDetail"
 import './ItemDetailContainer.css'
-import { DetalleItem } from "../ListItems/mock"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { getDoc, doc } from "firebase/firestore"
+import { firestoreDb } from "../../services/firebase/firebase"
 
 
 
 
 
-const ItemDetailContainer = (id)=>{
-    const [productoLocal,setProductoLocal]= useState([])
-    const [loading,setLoading] = useState(true)
-    const {productId} = useParams();
+const ItemDetailContainer = (id) => {
+    const [productoLocal, setProductoLocal] = useState([])
+    const [loading, setLoading] = useState(true)
+    const { productId } = useParams();
 
 
-    useEffect(()=>{
-        DetalleItem(productId).then(r=>{
-            setProductoLocal(r)
-        }).catch((err)=>{
-            console.log(err)
-        }).finally(()=>{
+    useEffect(() => {
+        setLoading(true)
+
+        const docRef = doc(firestoreDb, 'items', productId)
+        getDoc(docRef).then((response) => {
+            const product = { id: response.id, ...response.data() }
+            setProductoLocal(product)
+        }).finally(() => {
             setLoading(false)
         })
-        return (()=>{
+
+        return (() => {
             setProductoLocal()
         })
-    },[productId])
-    //console.log(productos)
-    //console.log(params)
+    }, [productId])
+    
     return (
         <>
             <h1>Detalle de un solo producto</h1>
-            {loading && productoLocal? <h1>Loading...</h1> : <ItemDetail products={productoLocal}/>}
+            {loading && productoLocal ? <h1>Loading...</h1> : <ItemDetail products={productoLocal} />}
         </>
     )
 }
