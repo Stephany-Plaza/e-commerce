@@ -1,9 +1,9 @@
 import './Item.css'
 import ItemCounter from '../counter/ItemCounter'
-import { useState, useContext, useCallback } from 'react'
+import { useState, useContext} from 'react'
 import { useNavigate } from "react-router-dom";
 import CartContext from '../../context/CartContext'
-import { items } from '../ListItems/mock';
+
 
 
 

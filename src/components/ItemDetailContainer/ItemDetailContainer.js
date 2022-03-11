@@ -3,7 +3,7 @@ import './ItemDetailContainer.css'
 import { DetalleItem } from "../ListItems/mock"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { items } from "../ListItems/mock"
+
 
 
 

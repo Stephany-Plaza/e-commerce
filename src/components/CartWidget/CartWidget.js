@@ -7,10 +7,6 @@ const CartWidget = () => {
     const [cartView,setCartView] = useState(false)
     const { getQuantity } = useContext(CartContext)
     
-    /*if(products>=1){
-        setCartView(true)
-    }*/
-    //{cartView ? {} : null}
     
     return(
         <Link to={'/cart'} className="CartWidget">

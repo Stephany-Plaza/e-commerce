@@ -1,6 +1,5 @@
 import { createContext, useState } from "react";
-import Item from "../components/Item/Item";
-import { items } from "../components/ListItems/mock";
+
 
 //creamos el context(con su referencia)
 const Context = createContext()

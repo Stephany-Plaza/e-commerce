@@ -1,7 +1,5 @@
-import ItemCounter from "../counter/ItemCounter"
 import { useEffect, useState } from "react"
 import ItemList from "../ItemList/ItemList"
-import ItemDetail from "../ItemDetail/ItemDetail"
 import { getItems} from '../ListItems/mock'
 import { useParams } from "react-router-dom"
 

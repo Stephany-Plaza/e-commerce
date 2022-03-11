@@ -1,6 +1,4 @@
 import './ItemList.css'
-import items from '../ListItems/mock'
-import ItemDetail from '../ItemDetail/ItemDetail'
 import Item from '../Item/Item'
 
 //simulacion de llamada a API

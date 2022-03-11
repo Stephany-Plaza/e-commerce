@@ -1,6 +1,6 @@
 import './Item.css'
 import { Link } from 'react-router-dom'
-import { items } from '../ListItems/mock'
+
 
 const Item = ({product}) => {
    
