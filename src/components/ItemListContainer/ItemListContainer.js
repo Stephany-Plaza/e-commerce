@@ -22,10 +22,10 @@ const ItemListContainer = ({ greeting }) => {
 
         getDocs(collectionRef).then(QuerySnapshot => {
             const products = QuerySnapshot.docs.map(doc => {
-                console.log(doc)
+                //console.log(doc)
                 return { id: doc.id, ...doc.data() }
             })
-            console.log(products)
+            //console.log(products)
             setProductos(products)
         }).finally(() => {
             setLoading(false)
