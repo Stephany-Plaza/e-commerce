@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import CartContext from '../../context/CartContext'
 import './Cart.css'
 import { Link } from "react-router-dom"
-//import setNotification from '../../services/notification'
+import { useNotificationServices } from '../../services/notification/NotificationServices'
 import { addDoc, collection, updateDoc, doc, getDocs, writeBatch, getDoc, Timestamp } from 'firebase/firestore'
 import { firestoreDb } from "../../services/firebase/firebase"
 
@@ -10,7 +10,7 @@ import { firestoreDb } from "../../services/firebase/firebase"
 const Cart = () => {
     const { products, getTotal, removeItem, clearCart } = useContext(CartContext)
     const [processingOrder, setProcessingOrder] = useState(false)
-    //const setNotification = useNotificationServices()
+    const setNotification = useNotificationServices()
 
     const confirmOder = () => {
 
@@ -45,14 +45,14 @@ const Cart = () => {
         if (outOfStock.length === 0) {
             addDoc(collection(firestoreDb, 'orders'), objOrder).then(({ id }) => {
                 batch.commit().then(() => {
-                    //setNotification('success',`la orden se genero exitosamente, su nro de orden es: ${id}`)
-                    alert(`la orden se ha ejecutado correctamente, su nro de orden es: ${id}`)
-                    console.log(`la orden se ha ejecutado correctamente, su nro de orden es: ${id}`)
+                    setNotification('success',`la orden se genero exitosamente, su nro de orden es: ${id}`)
+                    //alert(`la orden se ha ejecutado correctamente, su nro de orden es: ${id}`)
+                    //console.log(`la orden se ha ejecutado correctamente, su nro de orden es: ${id}`)
                     clearCart()
                 })
             }).catch(error => {
-                //setNotification('error', error)
-                console.log('error')
+                setNotification('error', error)
+                //console.log('error')
             }).finally(() => {
                 setProcessingOrder(false)
             })
@@ -81,7 +81,7 @@ const Cart = () => {
 
     const handleRemoveItem = (id, name) => {
         removeItem(id)
-        //setNotification('success', `Se removio ${name} del carrito`)
+        setNotification('success', `Se removio ${name} del carrito`)
     }
 
     return (
