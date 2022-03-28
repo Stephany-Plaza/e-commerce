@@ -5,8 +5,6 @@ import { getDocs, collection, QuerySnapshot, query, where } from 'firebase/fires
 import { firestoreDb } from "../../services/firebase/firebase"
 
 
-
-
 const ItemListContainer = ({ greeting }) => {
 
     const [productos, setProductos] = useState([])

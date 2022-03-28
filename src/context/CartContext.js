@@ -18,10 +18,6 @@ export const CartContextProvider = ({ children }) => {
 
         if (!itemInCart) return setProducts([...products, { ...items, quantity }]);
 
-        /*if(itemInCart.quantity+quantity>itemInCart.stock){
-            return setProducts([...products]);
-        }*/
-
         itemInCart.quantity += quantity;
         setProducts([
             ...products.filter((cartItem) => cartItem.id !== items.id),
