@@ -30,7 +30,7 @@ const ItemDetailContainer = (id) => {
             setProductoLocal()
         })
     }, [productId])
-    
+
     return (
         <>
             <h1>Detalle de un solo producto</h1>
@@ -39,3 +39,6 @@ const ItemDetailContainer = (id) => {
     )
 }
 export default ItemDetailContainer
+
+
+

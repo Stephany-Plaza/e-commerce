@@ -1,6 +1,6 @@
 import './Item.css'
 import ItemCounter from '../counter/ItemCounter'
-import { useState, useContext} from 'react'
+import { useState, useContext } from 'react'
 import { useNavigate } from "react-router-dom";
 import CartContext from '../../context/CartContext'
 
@@ -10,25 +10,28 @@ import CartContext from '../../context/CartContext'
 const ItemDetail = ({ products }) => {
     const [cartButton, setCartButton] = useState(false);
     const navigate = useNavigate()
-    const[quantity,setQuantity]=useState(0)
+    const [quantity, setQuantity] = useState(0)
 
-    const {addItem}=useContext(CartContext)
-    
+    const { addItem } = useContext(CartContext)
+
 
     const onAdd = (quantity) => {
         setQuantity(quantity)
+        if(quantity===0){
+            return setCartButton(false)
+        }
 
-        const productToAdd=[
+        const productToAdd = [
             products.id,
             products.title,
             products.price,
             products.category,
             quantity
         ]
-        addItem(products,quantity)
+        addItem(products, quantity)
         setCartButton(true)
     }
-    
+
     return (
         <article className="CardItem">
             <header className="Header">
@@ -45,7 +48,7 @@ const ItemDetail = ({ products }) => {
                 </p>
             </section>
             <footer className='ItemFooter'>
-                {cartButton ? <button onClick={() => { navigate('/cart') }}>Terminar mi compra</button> : <ItemCounter stock={products.stock} onAdd={onAdd} initial={1} />}
+                {cartButton ? <button onClick={() => { navigate('/cart') }}>Terminar mi compra</button> : <ItemCounter product={products}   onAdd={onAdd} initial={0} />}
             </footer>
         </article>
     )

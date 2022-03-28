@@ -11,22 +11,21 @@ const Notification = ({ message, severity }) => {
         alignItems: 'center',
         width: 'auto',
         height: 'auto',
-        // backgroundColor: severity === 'success' ? 'green' : 'red',
         padding: '10px 20px 10px 20px',
         color: 'white',
         borderRadius: '10px'
     }
 
     const config = true ?
-    {
-        style: notificationStyles,
-        className: severity === 'success' ? 'Success' : 'Error'
-    } : {}
+        {
+            style: notificationStyles,
+            className: severity === 'success' ? 'Success' : 'Error'
+        } : {}
 
-    if(message === '') {
+    if (message === '') {
         return null
     }
-    
+
     return (
         <div {...config}>
             {message}
@@ -36,7 +35,7 @@ const Notification = ({ message, severity }) => {
 
 const NotificationContext = createContext()
 
-export const NotificationServicesProvider = ({children}) => {
+export const NotificationServicesProvider = ({ children }) => {
     const [message, setMessage] = useState('')
     const [severity, setSeverity] = useState('')
 
@@ -50,7 +49,7 @@ export const NotificationServicesProvider = ({children}) => {
 
     return (
         <NotificationContext.Provider value={setNotification}>
-            <Notification message={message} severity={severity}/>
+            <Notification message={message} severity={severity} />
             {children}
         </NotificationContext.Provider>
     )

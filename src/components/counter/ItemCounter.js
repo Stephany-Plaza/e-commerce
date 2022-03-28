@@ -1,14 +1,23 @@
 import { useState } from "react";
+import { useContext } from "react";
+import CartContext from '../../context/CartContext';
 
-
-const ItemCounter = ({ stock, initial = 1,onAdd }) => {
-    //useState devuelve un array de una estado y una funcion, asi que hay que desestructurarlo[state,setState]
+const ItemCounter = ({ product, initial = 1, onAdd }) => {
     const [quantity, setQuantity] = useState(initial)
+    const { products } = useContext(CartContext)
 
     const increment = () => {
-        if (quantity < stock) {
+        let itemInCart = products.find((cartItem) => cartItem.id === product.id);
+        if(!itemInCart){
+            if (quantity < product.stock) {
+                setQuantity(quantity + 1)
+            }
+        }
+
+        if (quantity + itemInCart?.quantity < product.stock) {
             setQuantity(quantity + 1)
         }
+       
     }
 
     const decrement = () => {
@@ -17,7 +26,7 @@ const ItemCounter = ({ stock, initial = 1,onAdd }) => {
         }
     }
 
-   
+
     return (
         <div align="center">
             <table >
