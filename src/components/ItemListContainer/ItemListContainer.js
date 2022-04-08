@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react"
 import ItemList from "../ItemList/ItemList"
 import { useParams } from "react-router-dom"
-import { getDocs, collection, QuerySnapshot, query, where } from 'firebase/firestore'
-import { firestoreDb } from "../../services/firebase/firebase"
-
+import { getProducts } from '../../services/firebase/firebase'
+import { useNotificationServices } from '../../services/notification/NotificationServices'
 
 const ItemListContainer = ({ greeting }) => {
 
@@ -11,23 +10,24 @@ const ItemListContainer = ({ greeting }) => {
     const [loading, setLoading] = useState(true)
     const { categoryId } = useParams();
 
+    
+    const setNotification = useNotificationServices()
 
     useEffect(() => {
-        const collectionRef = categoryId ?
-            query(collection(firestoreDb, 'items'), where('category', '==', categoryId)) :
-            collection(firestoreDb, 'items');
+        setLoading(true)
 
-
-        getDocs(collectionRef).then(QuerySnapshot => {
-            const products = QuerySnapshot.docs.map(doc => {
-                return { id: doc.id, ...doc.data() }
-            })
-
-            setProductos(products)
+        getProducts(categoryId).then(response => {
+            setProductos(response)
+        }).catch((error) => {
+            setNotification('error', error)
         }).finally(() => {
             setLoading(false)
         })
-    }, [categoryId])
+
+        return (() => {
+            setProductos()
+        })          
+    }, [categoryId]) // eslint-disable-line
 
     return (
         <>

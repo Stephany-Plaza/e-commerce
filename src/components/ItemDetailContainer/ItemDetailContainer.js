@@ -1,9 +1,9 @@
-import ItemDetail from "../ItemDetail/ItemDetail"
 import './ItemDetailContainer.css'
+import ItemDetail from "../ItemDetail/ItemDetail"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getDoc, doc } from "firebase/firestore"
-import { firestoreDb } from "../../services/firebase/firebase"
+import { useNotificationServices } from '../../services/notification/NotificationServices'
+import { getProductById } from '../../services/firebase/firebase'
 
 
 
@@ -12,16 +12,18 @@ import { firestoreDb } from "../../services/firebase/firebase"
 const ItemDetailContainer = (id) => {
     const [productoLocal, setProductoLocal] = useState([])
     const [loading, setLoading] = useState(true)
-    const { productId } = useParams();
 
+
+    const { productId } = useParams();
+    const setNotification = useNotificationServices()
 
     useEffect(() => {
         setLoading(true)
 
-        const docRef = doc(firestoreDb, 'items', productId)
-        getDoc(docRef).then((response) => {
-            const product = { id: response.id, ...response.data() }
-            setProductoLocal(product)
+        getProductById(productId).then(response => {
+            setProductoLocal(response)
+        }).catch((error) => {
+            setNotification('error',`Error buscando producto: ${error}`)
         }).finally(() => {
             setLoading(false)
         })
@@ -29,7 +31,8 @@ const ItemDetailContainer = (id) => {
         return (() => {
             setProductoLocal()
         })
-    }, [productId])
+
+    }, [productId]) // eslint-disable-line
 
     return (
         <>
