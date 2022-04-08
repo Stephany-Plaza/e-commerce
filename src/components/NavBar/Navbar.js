@@ -3,7 +3,6 @@ import CartWidget from '../CartWidget/CartWidget'
 import { NavLink } from 'react-router-dom'
 import { useState, useEffect, useContext } from 'react'
 import CartContext from '../../context/CartContext'
-import { getDocs, collection } from 'firebase/firestore'
 import { getCategories } from '../../services/firebase/firebase'
 import { useNotificationServices } from '../../services/notification/NotificationServices'
 

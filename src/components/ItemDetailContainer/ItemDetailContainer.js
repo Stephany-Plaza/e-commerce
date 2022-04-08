@@ -6,9 +6,6 @@ import { useNotificationServices } from '../../services/notification/Notificatio
 import { getProductById } from '../../services/firebase/firebase'
 
 
-
-
-
 const ItemDetailContainer = (id) => {
     const [productoLocal, setProductoLocal] = useState([])
     const [loading, setLoading] = useState(true)
